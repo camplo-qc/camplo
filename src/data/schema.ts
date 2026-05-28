@@ -3,7 +3,7 @@
 // - Chaque page injecte les schémas spécifiques à son contenu (SoftwareApplication, WebPage, BreadcrumbList).
 // Évite la pollution d'entités cross-page.
 
-export const SITE_URL = 'https://www.camplo.ca';
+export const SITE_URL = 'https://camplo.ca';
 
 export const crmSoftwareApplication = {
   '@context': 'https://schema.org',

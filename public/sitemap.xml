@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.camplo.ca/</loc>
+    <loc>https://camplo.ca/</loc>
     <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.camplo.ca/blog/</loc>
+    <loc>https://camplo.ca/blog/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.camplo.ca/blog/logiciel-gestion-camping/</loc>
+    <loc>https://camplo.ca/blog/logiciel-gestion-camping/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.camplo.ca/blog/site-reservation-camping/</loc>
+    <loc>https://camplo.ca/blog/site-reservation-camping/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.camplo.ca/sitemap.xml
+Sitemap: https://camplo.ca/sitemap.xml

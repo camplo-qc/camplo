@@ -1,0 +1,207 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import SubpageHeader from '../../components/SubpageHeader.astro';
+
+const title = 'Blog · Camplo';
+const description =
+  "Articles et ressources Camplo : logiciel de gestion camping (CRM) et site de réservation en ligne sans commission pour campings du Québec.";
+
+const articles = [
+  {
+    eyebrow: 'Produit · CRM',
+    title: 'Logiciel de gestion camping conçu au Québec',
+    excerpt:
+      "Camplo CRM remplace cahiers, Excel et logiciels américains : tableau de bord, calendrier, réservations, clients, fiscalité TPS/TVQ.",
+    href: '/blog/logiciel-gestion-camping/',
+    date: '2026-04-25',
+  },
+  {
+    eyebrow: 'Produit · Site web',
+    title: 'Site de réservation camping sans commission',
+    excerpt:
+      "Site de réservation en ligne avec paiement Stripe intégré, confirmation automatique, aucune commission par réservation. Couplé au CRM.",
+    href: '/blog/site-reservation-camping/',
+    date: '2026-04-25',
+  },
+];
+
+const fmtDate = (iso: string) =>
+  new Intl.DateTimeFormat('fr-CA', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(new Date(`${iso}T12:00:00`));
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/blog/"
+  includeFaqJsonLd={false}
+  includeProductPreloads={false}
+>
+  <SubpageHeader />
+
+  <main class="subpage">
+    <article class="article">
+      <p class="eyebrow">Blog</p>
+      <h1 class="title">
+        Notes & <em>ressources</em>
+      </h1>
+      <p class="lede">
+        Quelques pages détaillées sur ce qu'on construit chez Camplo, écrites
+        pour les propriétaires de campings indépendants du Québec.
+      </p>
+
+      <ul class="post-list">
+        {articles.map((post) => (
+          <li class="post-item">
+            <a class="post-link" href={post.href}>
+              <div class="post-meta">
+                <p class="post-eyebrow">{post.eyebrow}</p>
+                <time class="post-date" datetime={post.date}>{fmtDate(post.date)}</time>
+              </div>
+              <h2 class="post-title">{post.title}</h2>
+              <p class="post-excerpt">{post.excerpt}</p>
+              <span class="post-cta">Lire l'article →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .subpage {
+    background: var(--paper);
+    padding: clamp(40px, 6vw, 80px) 0 clamp(60px, 8vw, 120px);
+    min-height: 60vh;
+  }
+
+  .article {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 var(--wrap-pad-x);
+  }
+
+  .eyebrow {
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fern);
+    margin-bottom: 18px;
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(36px, 5vw, 60px);
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    color: var(--ink);
+    margin: 0 0 28px;
+  }
+  .title em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--marmalade);
+  }
+
+  .lede {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin: 0 0 48px;
+    max-width: 60ch;
+  }
+
+  .post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .post-item {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .post-link {
+    display: block;
+    padding: clamp(24px, 3vw, 36px) 0;
+    transition: opacity 160ms ease;
+  }
+  .post-link:hover {
+    opacity: 0.78;
+  }
+  .post-link:hover .post-cta {
+    color: var(--marmalade);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 10px;
+  }
+  .post-eyebrow {
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fern);
+    margin: 0;
+  }
+  .post-date {
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(22px, 2.2vw, 28px);
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+
+  .post-excerpt {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(15px, 1.05vw, 17px);
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    max-width: 62ch;
+  }
+
+  .post-cta {
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--fern);
+    border-bottom: 1px solid var(--marmalade);
+    padding-bottom: 2px;
+    transition: color 160ms ease;
+  }
+</style>

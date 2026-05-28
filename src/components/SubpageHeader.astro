@@ -1,0 +1,118 @@
+---
+// Header des sous-pages (blog) : même pastille que le nav normal (Nav.astro).
+// Logo (lien accueil) à gauche + bouton « retour » qui reprend exactement les
+// grandeurs / paddings / hover des liens du nav. Le libellé et la destination
+// du bouton s'adaptent par page. Visible sur mobile.
+interface Props {
+  backHref?: string;
+  backLabel?: string;
+}
+const { backHref = '/', backLabel = 'Retour au site' } = Astro.props;
+---
+
+<header class="subpage-nav" role="banner">
+  <div class="subpage-pill">
+    <a href="/" class="subpage-logo" aria-label="Accueil Camplo">
+      <img src="/brand/camplo-mark.svg" alt="" class="subpage-mark" width="24" height="24" />
+    </a>
+    <a href={backHref} class="subpage-back" aria-label={backLabel}>
+      <span class="subpage-arrow" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <path d="m15 18-6-6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <span class="subpage-back-label">{backLabel}</span>
+    </a>
+  </div>
+</header>
+
+<style>
+  /* Valeurs alignées sur Nav.astro (.nav-pill / .nav-links a). */
+  .subpage-nav {
+    position: sticky;
+    top: 20px;
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    margin: 20px var(--wrap-pad-x) 0;
+  }
+
+  .subpage-pill {
+    pointer-events: auto;
+    background: var(--ink);
+    color: var(--paper);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 6px 6px 20px;
+    border-radius: 9999px;
+    box-shadow: 0 8px 32px rgba(28, 28, 26, 0.18);
+  }
+
+  .subpage-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+  }
+  .subpage-mark {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  /* Bouton « retour » = un lien du nav (mêmes paddings + hover). */
+  .subpage-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    border-radius: 9999px;
+    color: var(--paper);
+    opacity: 0.78;
+    transition: opacity 160ms ease, background 160ms ease;
+  }
+  .subpage-back:hover {
+    opacity: 1;
+    background: rgba(246, 240, 224, 0.08);
+  }
+
+  .subpage-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--paper);
+  }
+  .subpage-arrow svg { display: block; }
+
+  .subpage-back-label {
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--paper);
+  }
+
+  @media (max-width: 640px) {
+    .subpage-nav {
+      top: 14px;
+      margin: 14px 16px 0;
+    }
+    .subpage-pill {
+      padding: 5px 5px 5px 16px;
+      gap: 4px;
+    }
+    .subpage-mark {
+      width: 20px;
+      height: 20px;
+    }
+    .subpage-back {
+      padding: 9px 10px;
+    }
+    .subpage-back-label {
+      font-size: 11px;
+    }
+  }
+</style>

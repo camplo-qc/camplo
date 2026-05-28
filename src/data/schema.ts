@@ -14,7 +14,7 @@ export const crmSoftwareApplication = {
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Windows, macOS',
   description:
-    "Application desktop de gestion de camping (réservations, clients, emplacements, fiscalité TPS/TVQ) sans stockage en nuage — vos données restent sur place.",
+    "Application desktop de gestion de camping (réservations, clients, emplacements, fiscalité TPS/TVQ) avec base de données dédiée par camping, hébergée par Camplo.",
   provider: { '@id': `${SITE_URL}/#organization` },
   offers: {
     '@type': 'Offer',
@@ -64,10 +64,11 @@ export interface WebPageMeta {
   name: string;
   description: string;
   about?: string;
+  datePublished?: string;
   dateModified?: string;
 }
 
-export function buildWebPage({ url, name, description, about, dateModified }: WebPageMeta) {
+export function buildWebPage({ url, name, description, about, datePublished, dateModified }: WebPageMeta) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -78,6 +79,7 @@ export function buildWebPage({ url, name, description, about, dateModified }: We
     inLanguage: 'fr-CA',
     isPartOf: { '@id': `${SITE_URL}/#website` },
     ...(about ? { about: { '@id': about } } : {}),
+    ...(datePublished ? { datePublished } : {}),
     ...(dateModified ? { dateModified } : {}),
   };
 }

@@ -1,22 +1,26 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Footer from '../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import SubpageHeader from '../../components/SubpageHeader.astro';
 import {
   SITE_URL,
   siteSoftwareApplication,
   buildBreadcrumb,
   buildWebPage,
-} from '../data/schema';
+} from '../../data/schema';
 
-const title = 'Site de réservation camping en ligne sans commission — Camplo';
+const title = 'Site de réservation camping en ligne sans commission · Camplo';
 const description =
   "Camplo crée des sites de réservation en ligne pour campings indépendants du Québec. Paiement par carte Stripe intégré, confirmation automatique, aucune commission par réservation.";
-const pageUrl = `${SITE_URL}/site-reservation-camping/`;
+const pageUrl = `${SITE_URL}/blog/site-reservation-camping/`;
 
-// Schémas spécifiques à cette page :
-// - SoftwareApplication du site de réservation uniquement (pas le CRM)
-// - WebPage : entité page-level reliée à #website + #site
-// - BreadcrumbList : Camplo > Site de réservation camping
+const datePublished = '2026-04-25';
+const datePublishedLabel = new Intl.DateTimeFormat('fr-CA', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(new Date(`${datePublished}T12:00:00`));
+
 const pageJsonLd = [
   siteSoftwareApplication,
   buildWebPage({
@@ -24,10 +28,12 @@ const pageJsonLd = [
     name: title,
     description,
     about: `${SITE_URL}/#site`,
+    datePublished,
     dateModified: '2026-04-25',
   }),
   buildBreadcrumb([
     { name: 'Camplo', url: `${SITE_URL}/` },
+    { name: 'Blog', url: `${SITE_URL}/blog/` },
     { name: 'Site de réservation camping', url: pageUrl },
   ]),
 ];
@@ -36,18 +42,13 @@ const pageJsonLd = [
 <Layout
   title={title}
   description={description}
-  canonicalPath="/site-reservation-camping/"
-  ogImageAlt="Camplo — site de réservation camping en ligne sans commission pour campings québécois"
+  canonicalPath="/blog/site-reservation-camping/"
+  ogImageAlt="Camplo : site de réservation camping en ligne sans commission pour campings québécois"
   includeFaqJsonLd={false}
   includeProductPreloads={false}
   pageJsonLd={pageJsonLd}
 >
-  <header class="subpage-header">
-    <a href="/" class="subpage-back" aria-label="Retour à l'accueil Camplo">
-      <img src="/brand/camplo-mark.svg" alt="" width="22" height="22" />
-      <span>Camplo</span>
-    </a>
-  </header>
+  <SubpageHeader backHref="/blog/" backLabel="Retour aux articles" />
 
   <main class="subpage">
     <article class="article">
@@ -55,11 +56,14 @@ const pageJsonLd = [
       <h1 class="title">
         Le site de <em>réservation camping</em> qui encaisse, pas qui commissionne
       </h1>
+      <p class="article-meta">
+        Publié le <time datetime={datePublished}>{datePublishedLabel}</time>
+      </p>
 
       <p class="lede">
         Un site de réservation en ligne dédié à votre camping, branché à un
         terminal Stripe, qui transforme un visiteur curieux en réservation
-        confirmée et payée — sans intermédiaire, sans commission, sans
+        confirmée et payée, sans intermédiaire, sans commission, sans
         formulaire de douze pages.
       </p>
 
@@ -89,7 +93,7 @@ const pageJsonLd = [
         <p>
           Sur 200 réservations à 200&nbsp;$ avec une plateforme qui prend
           15&nbsp;%, vous laissez <strong>6&nbsp;000&nbsp;$ par mois</strong>
-          sur la table. Camplo, c'est un abonnement mensuel fixe — vous savez
+          sur la table. Camplo, c'est un abonnement mensuel fixe : vous savez
           d'avance ce que vous payez, peu importe que vous fassiez 50 ou 500
           réservations dans le mois. Vos profits restent les vôtres.
         </p>
@@ -120,7 +124,7 @@ const pageJsonLd = [
         <h2>Couplé avec votre logiciel de gestion (CRM)</h2>
         <p>
           Le site de réservation peut tourner seul, mais il devient
-          redoutable couplé avec le <a class="inline-cta" href="/logiciel-gestion-camping/">logiciel de gestion camping Camplo</a>.
+          redoutable couplé avec le <a class="inline-cta" href="/blog/logiciel-gestion-camping/">logiciel de gestion camping Camplo</a>.
           Chaque réservation web apparaît instantanément dans votre tableau
           de bord, avec le nom du client, son emplacement, ses services. Une
           seule source de vérité, pas de double saisie.
@@ -130,7 +134,7 @@ const pageJsonLd = [
         </p>
       </section>
 
-      <section class="section">
+      <section class="section cta-card">
         <h2>Discutons de votre projet</h2>
         <p>
           Chaque camping a sa réalité : nombre d'emplacements, types de
@@ -141,9 +145,15 @@ const pageJsonLd = [
         <div class="cta-row">
           <a class="pill pill--primary" href="mailto:adamauger872@gmail.com">
             Écrivez-nous
+            <svg class="pill-arrow" viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+              <path d="M4 10 L10 4 M5 4 L10 4 L10 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </a>
           <a class="pill pill--ghost" href="tel:5817480161">
             581-748-0161
+            <svg class="pill-arrow" viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+              <path d="M4 10 L10 4 M5 4 L10 4 L10 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </a>
         </div>
       </section>
@@ -154,32 +164,6 @@ const pageJsonLd = [
 </Layout>
 
 <style>
-  .subpage-header {
-    display: flex;
-    justify-content: flex-start;
-    padding: 28px var(--wrap-pad-x) 0;
-  }
-
-  .subpage-back {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-label);
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink);
-    opacity: 0.78;
-    padding: 8px 14px 8px 10px;
-    border-radius: 9999px;
-    transition: opacity 160ms ease, background-color 160ms ease;
-  }
-  .subpage-back:hover {
-    opacity: 1;
-    background-color: rgba(28, 28, 26, 0.05);
-  }
-
   .subpage {
     background: var(--paper);
     padding: clamp(40px, 6vw, 80px) 0 clamp(60px, 8vw, 120px);
@@ -209,12 +193,24 @@ const pageJsonLd = [
     letter-spacing: -0.025em;
     line-height: 1.05;
     color: var(--ink);
-    margin: 0 0 28px;
+    margin: 0 0 14px;
   }
   .title em {
     font-style: italic;
     font-weight: 500;
     color: var(--marmalade);
+  }
+
+  .article-meta {
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--ink-muted);
+    margin: 0 0 32px;
+  }
+  .article-meta time {
+    color: var(--ink-soft);
   }
 
   .lede {
@@ -296,38 +292,70 @@ const pageJsonLd = [
     color: var(--marmalade);
   }
 
-  .cta-row {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 8px;
+  /* Section « Discutons » : card noire (permet les pills sur fond sombre). */
+  .cta-card {
+    background: var(--ink);
+    border-radius: 24px;
+    padding: clamp(32px, 5vw, 56px);
+  }
+  .cta-card h2 {
+    color: var(--paper);
+  }
+  .cta-card p {
+    color: var(--paper-soft);
+  }
+  .cta-card p strong {
+    color: var(--paper);
   }
 
+  /* Pills identiques à CtaFinal (section contact du site normal). */
+  .cta-row {
+    margin-top: 14px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
   .pill {
     display: inline-flex;
     align-items: center;
-    padding: 14px 22px;
-    border-radius: 9999px;
+    gap: 6px;
+    padding: 10px 16px;
     font-family: var(--font-label);
     font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.06em;
+    font-size: 11px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: background-color 200ms ease, color 200ms ease,
+                border-color 200ms ease,
+                transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .pill-arrow {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    flex-shrink: 0;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .pill:hover .pill-arrow {
+    transform: translate(2px, -2px);
   }
   .pill--primary {
-    background: var(--ink);
+    background: var(--marmalade);
     color: var(--paper);
   }
   .pill--primary:hover {
-    background: var(--marmalade);
+    background: var(--paper);
+    color: var(--ink);
   }
   .pill--ghost {
     background: transparent;
-    color: var(--ink);
-    border: 1px solid var(--rule);
+    color: var(--paper-warm);
+    border: 1px solid rgba(246, 240, 224, 0.3);
   }
   .pill--ghost:hover {
-    background: rgba(28, 28, 26, 0.05);
+    border-color: var(--paper);
+    color: var(--paper);
   }
 </style>

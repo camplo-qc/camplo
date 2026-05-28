@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/logiciel-gestion-camping",
+      "destination": "/blog/logiciel-gestion-camping/",
+      "permanent": true
+    },
+    {
+      "source": "/site-reservation-camping",
+      "destination": "/blog/site-reservation-camping/",
+      "permanent": true
+    }
+  ]
+}

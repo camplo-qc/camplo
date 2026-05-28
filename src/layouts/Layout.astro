@@ -13,17 +13,19 @@ interface Props {
   includeFaqJsonLd?: boolean;
   includeProductPreloads?: boolean;
   pageJsonLd?: object[];
+  noIndex?: boolean;
 }
 
 const {
-  title = 'Camplo — Logiciel de gestion et réservation pour campings au Québec',
-  description = "Camplo est le logiciel de gestion camping (CRM) et le système de réservation en ligne sans commission, conçu au Québec pour les campings indépendants. Zéro commission, vos données restent chez vous.",
+  title = 'Logiciel de gestion et réservation camping · Camplo',
+  description = "Camplo est le logiciel de gestion camping (CRM) et le système de réservation en ligne sans commission, conçu au Québec pour les campings indépendants. Zéro commission, une base de données dédiée à votre camping.",
   canonicalPath = Astro.url.pathname,
   ogImage = '/og-image.png',
   ogImageAlt = 'Camplo — Logiciel de gestion et réservation pour campings au Québec',
   includeFaqJsonLd = true,
   includeProductPreloads = true,
   pageJsonLd = [],
+  noIndex = false,
 } = Astro.props;
 
 const canonicalUrl = new URL(canonicalPath, SITE_URL).href;
@@ -124,7 +126,7 @@ const faqJsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content="" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content={noIndex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
     <meta name="theme-color" content="#3E6B31" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

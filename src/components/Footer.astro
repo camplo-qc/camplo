@@ -1,7 +1,7 @@
 ---
 // Footer, large pill noire centrée
 const YEAR = new Date().getFullYear();
-const EMAIL = 'commercial@tekio.ca';
+const EMAIL = 'contact@tekio.ca';
 const PHONE = '5817480161';
 ---
 
@@ -17,7 +17,7 @@ const PHONE = '5817480161';
         />
       </span>
       <span class="footer-copy">
-        © {YEAR} Camplo · <a class="footer-tekio" href="https://tekio.ca" target="_blank" rel="noopener">par Tekio</a><span class="footer-copy-suffix"> · Conçu au Québec</span>
+        © {YEAR} Camplo · par <a class="footer-tekio" href="https://tekio.ca" target="_blank" rel="noopener" aria-label="Tekio"><span class="footer-tekio-logo" role="img" aria-hidden="true"></span></a><span class="footer-copy-suffix"> · Conçu au Québec</span>
       </span>
     </div>
 
@@ -129,12 +129,22 @@ const PHONE = '5817480161';
 
   .footer-tekio {
     color: inherit;
-    text-decoration: underline;
-    text-underline-offset: 2px;
     transition: color 160ms ease;
   }
   .footer-tekio:hover {
-    color: var(--marmalade);
+    color: #c5f84f; /* lime Tekio (--green de tekio.ca) */
+  }
+
+  /* Wordmark Tekio en masque CSS : le PNG (noir sur alpha) sert de pochoir,
+     currentColor le teinte — paper par défaut, marmalade au hover. */
+  .footer-tekio-logo {
+    display: inline-block;
+    width: 42px;
+    height: 11px;
+    vertical-align: -1px;
+    background: currentColor;
+    -webkit-mask: url('/brand/tekio-wordmark.png') no-repeat center / contain;
+    mask: url('/brand/tekio-wordmark.png') no-repeat center / contain;
   }
 
   .footer-actions {
@@ -158,16 +168,30 @@ const PHONE = '5817480161';
     color: var(--marmalade);
   }
 
+  /* Sur mobile, empile les items du footer : logo + copyright au-dessus,
+     actions en dessous. La pill devient un rectangle arrondi. */
   @media (max-width: 640px) {
     .footer {
       padding: 0 16px 14px;
     }
     .footer-pill {
-      gap: 10px;
-      padding: 16px 22px;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 22px;
+      border-radius: 28px;
+    }
+    .footer-left {
+      max-width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 6px;
     }
     .footer-copy {
+      min-width: 0;
       font-size: 11px;
+      white-space: normal;
+      text-align: center;
     }
     .footer-icon {
       width: 28px;
@@ -176,14 +200,6 @@ const PHONE = '5817480161';
     .footer-icon svg {
       width: 14px;
       height: 14px;
-    }
-  }
-
-  /* Sur écran étroit, supprime « · Conçu au Québec » pour laisser place
-     aux icônes contact qui étaient poussées hors de la pill. */
-  @media (max-width: 480px) {
-    .footer-copy-suffix {
-      display: none;
     }
   }
 

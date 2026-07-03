@@ -1,7 +1,7 @@
 ---
 // Footer, large pill noire centrée
 const YEAR = new Date().getFullYear();
-const EMAIL = 'adamauger872@gmail.com';
+const EMAIL = 'commercial@tekio.ca';
 const PHONE = '5817480161';
 ---
 
@@ -17,7 +17,7 @@ const PHONE = '5817480161';
         />
       </span>
       <span class="footer-copy">
-        © {YEAR} Camplo<span class="footer-copy-suffix"> · Conçu au Québec</span>
+        © {YEAR} Camplo · <a class="footer-tekio" href="https://tekio.ca" target="_blank" rel="noopener">par Tekio</a><span class="footer-copy-suffix"> · Conçu au Québec</span>
       </span>
     </div>
 
@@ -125,6 +125,16 @@ const PHONE = '5817480161';
     color: var(--paper);
     opacity: 0.7;
     white-space: nowrap;
+  }
+
+  .footer-tekio {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 160ms ease;
+  }
+  .footer-tekio:hover {
+    color: var(--marmalade);
   }
 
   .footer-actions {

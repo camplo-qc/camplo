@@ -122,8 +122,9 @@ const PHONE = '5817480161';
     font-weight: 500;
     font-size: 12px;
     letter-spacing: 0.04em;
-    color: var(--paper);
-    opacity: 0.7;
+    /* Atténuation via la couleur (pas opacity sur l'élément) pour que le
+       hover lime du lien Tekio s'affiche à pleine intensité. */
+    color: color-mix(in srgb, var(--paper) 70%, transparent);
     white-space: nowrap;
   }
 
